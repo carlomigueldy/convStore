@@ -17,3 +17,5 @@
 
 Route::get('/', 'Home@index');
 Route::get('/employees', 'EmployeesController@index');
+
+Route::resource('employees', 'EmployeesController');

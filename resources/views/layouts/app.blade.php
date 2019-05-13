@@ -7,16 +7,19 @@
         <title>{{config('app.name')}}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
-        <script src="{{ asset('js/semantic.min.js') }}"></script>
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"> --}}
     </head>
     <body>
         <br><br>
             <div class="ui container">
             @include('inc.nav')
+                @include('inc.messages')
                 @yield('content')
             </div>
+
+        <script src="{{ asset('js/semantic.min.js') }}"></script>
     </body>
 </html>

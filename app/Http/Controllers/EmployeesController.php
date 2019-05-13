@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Job;
 use DB;
 class EmployeesController extends Controller
 {
@@ -29,7 +30,8 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        $jobs = Job::pluck("job", "id");
+        return view('employees.create')->with('jobs', $jobs);
     }
 
     /**
@@ -40,7 +42,17 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'job_id' => 'required'
+        ]);
+
+        $employees = new Employee;
+        $employees->name = $request->input('name');
+        $employees->job_id = $request->input('job_id');
+        $employees->save();
+
+        return redirect('/employees')->with('success', 'Employee has been added!');
     }
 
     /**
