@@ -1,31 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>List of Employees</h1>
+    <h1 class="ui left floated">List of Employees</h1>
+    <a class="ui positive basic button">Add Employee</a>
     <table class="ui celled table">
         <thead>
             <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Job</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Job</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-label="Name">James</td>
-                <td data-label="Age">24</td>
-                <td data-label="Job">Engineer</td>
-            </tr>
-            <tr>
-                <td data-label="Name">Jill</td>
-                <td data-label="Age">26</td>
-                <td data-label="Job">Engineer</td>
-            </tr>
-            <tr>
-                <td data-label="Name">Elyse</td>
-                <td data-label="Age">24</td>
-                <td data-label="Job">Designer</td>
-            </tr>
+            @if(count($employees) > 0)
+                @foreach($employees as $row)
+                    <td>{{$row->id}}</td>
+                    <td>{{$row->name}}</td>
+                    <td>{{$row->job}}</td>
+                @endforeach
+            @else 
+                <tr align="center">
+                    <td colspan="3">
+                        <p>There are no employees.</p>
+                    </td>
+                </tr>
+            @endif
         </tbody>
     </table>
 @endsection

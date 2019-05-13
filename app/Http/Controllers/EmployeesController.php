@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Employee;
+use DB;
 class EmployeesController extends Controller
 {
     /**
@@ -13,7 +14,12 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        return view('employees.index');
+        // $employees = Employee::all();
+        $employees = DB::table('employees')
+            ->join('jobs','jobs.id', 'employees.job_id')
+            ->select('employees.name', 'jobs.job', 'employees.id', 'employees.job_id')
+            ->get();
+        return view('employees.index')->with('employees', $employees);
     }
 
     /**
